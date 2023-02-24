@@ -19,12 +19,12 @@ public class CharacterServices {
     private ResponseModel rm;
 
     // List of characters method
-    public Iterable<CharacterModel> listCharacter(){
+    public Iterable<CharacterModel> charList(){
         return cr.findAll();
     }
 
     // Register and update character method
-    public ResponseEntity<?> charUpdt(CharacterModel cm, String action){
+    public ResponseEntity<?> charUpdtCrt(CharacterModel cm, String action){
         
         if(cm.getName().equals("")) {
             rm.setMessage("Nome do personagem obrigatório!");
@@ -35,7 +35,7 @@ public class CharacterServices {
             return new ResponseEntity<ResponseModel>(rm, HttpStatus.BAD_REQUEST);
 
         } else {
-            if(action.equals("register")){
+            if(action.equals("create")) {
                 return new ResponseEntity<CharacterModel>(cr.save(cm), HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<CharacterModel>(cr.save(cm), HttpStatus.OK);
@@ -44,10 +44,10 @@ public class CharacterServices {
         }
     }
 
-    public ResponseEntity<ResponseModel> remove(long id) {
+    public ResponseEntity<ResponseModel> charRmv(long id){
         cr.deleteById(id);
 
-        rm.setMessage("Produto removido com sucesso!");
+        rm.setMessage("Personagem removido com sucesso!");
         return new ResponseEntity<ResponseModel>(rm, HttpStatus.OK);
     }
 }

@@ -22,24 +22,24 @@ public class CharacterController {
     @Autowired
     private CharacterServices cs;
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<ResponseModel> delete(@PathVariable long id) {
-        return cs.remove(id);
+    @DeleteMapping("/deleteCharacter/{id}")
+    public ResponseEntity<ResponseModel> deleteCharacter(@PathVariable long id) {
+        return cs.charRmv(id);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<?> update(@RequestBody CharacterModel cm) {
-        return cs.charUpdt(cm, "update");
+    @PutMapping("/updateCharacter")
+    public ResponseEntity<?> updateCharacter(@RequestBody CharacterModel cm){
+        return cs.charUpdtCrt(cm, "update");
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<?> register(@RequestBody CharacterModel cm){
-        return cs.charUpdt(cm, "register");
+    @PostMapping("/createCharacter")
+    public ResponseEntity<?> createCharacter(@RequestBody CharacterModel cm){
+        return cs.charUpdtCrt(cm, "create");
     }
 
     @GetMapping("/listCharacter")
     public Iterable<CharacterModel> listCharacter(){
-        return cs.listCharacter();
+        return cs.charList();
     }
 
     @GetMapping("/")
